@@ -51,7 +51,6 @@ def bokeh_plot(G, title='Word network around #lockdown and #pandemia', layout='s
     from bokeh.transform import linear_cmap
     from bokeh.embed import file_html
     from bokeh.resources import CDN
-    from community import community_louvain
     from bokeh.models import ColorBar
     import random
 
@@ -61,18 +60,6 @@ def bokeh_plot(G, title='Word network around #lockdown and #pandemia', layout='s
     )
     sampled_nodes = random.sample(G.nodes, k)
     G = G.subgraph(sampled_nodes)
-    # # create empty dictionaries
-    # modularity_class = {}
-    # modularity_color = {}
-    # # loop through each community in the network
-    # for comm in communities:
-    #     # For each member of the community, add their community number and a distinct color
-    #     for name in comm:
-    #         modularity_class[comm] = communities[comm]
-    #         modularity_color[comm] = Pastel1[8][communities[comm] % 8]
-    # # add modularity class and color as attributes from the network above
-    # nx.set_node_attributes(G, modularity_class, 'modularity_class')
-    # nx.set_node_attributes(G, modularity_color, 'modularity_color')
     # color by centrality
     betweenness = nx.betweenness_centrality(G)
     nx.set_node_attributes(G, name='betweenness', values=betweenness)
