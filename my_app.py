@@ -12,8 +12,9 @@ import io
 
 
 def get_network_weighted(path_to_net):
-    download = requests.get(path_to_net).content
-    G = nx.read_edgelist(io.StringIO(download.decode('utf-8')))
+    #download = requests.get(path_to_net).content
+    #G = nx.read_edgelist(io.StringIO(download.decode('utf-8')))
+    G = nx.read_edgelist(path_to_net)
     edgelist=nx.to_pandas_edgelist(G)
     table, nnodes, nnedges = backboning.read(edgelist, 'weight', undirected=True, sep=' ')
     nc_table = backboning.noise_corrected(table, undirected=True)
@@ -160,13 +161,13 @@ def bokeh_plot(G, title='Word network around #lockdown and #pandemia', layout='s
 
 def main():
 
-    data_url = 'https://raw.githubusercontent.com/antscomplexity/streamlit/network_visualisation/LockdownANDPandemia.txt'
+    #data_url = 'https://raw.githubusercontent.com/antscomplexity/streamlit/network_visualisation/LockdownANDPandemia.txt'
     expander = st.beta_expander("Description")
     expander.write("This is the word network related the hashtags '#lockdown' and '#pandemia' (Italian for 'pandemic'). ")
     expander = st.beta_expander("How to use the graph")
     expander.write("Use the menu on the left to change the number of nodes which are sampled. \n You can also change the layout parameters to better fit the current network.")
 
-    net = get_network_unweighted(data_url)
+    net = get_network_unweighted("LockdownANDPandemia.txt")
     bokeh_plot(net)
 
 
