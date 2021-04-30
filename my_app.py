@@ -166,7 +166,7 @@ def main():
     expander = st.beta_expander("How to use the graph")
     expander.write("Use the menu on the left to change the number of nodes which are sampled. \n You can also change the layout parameters to better fit the current network.")
 
-    net = get_network_unweighted("data_url")
+    net = get_network_unweighted(data_url)
     bokeh_plot(net)
 
 
