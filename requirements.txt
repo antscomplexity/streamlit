@@ -1,1 +1,2 @@
 streamlit==0.69
+networkx==2.5
